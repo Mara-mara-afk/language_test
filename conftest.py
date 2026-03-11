@@ -13,10 +13,10 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="function")
 def browser(request):
     language = request.config.getoption("language")
-    print(f"\nЗапуск браузера с языком: {language}")
     options = Options()
     options.add_experimental_option('prefs', {'intl.accept_languages': language})
     options.add_argument("--disable-notifications")
     browser = webdriver.Chrome(options=options)
     yield browser
+
     browser.quit()
